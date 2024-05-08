@@ -1,41 +1,40 @@
 <?php
 
-use App\Http\Controllers\JobController;
-use App\Models\Job;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\RegisteredUserController;
 
 
-
-
-Route::get('/', function () {
+// Route::get('/', function () {
     
-    return view('home');
-});
+    //     return view('home');
+    // });
+    
+    Route::view('/', 'home');
+    Route::view('/contact', 'contact');
+
+    Route::resource('jobs', JobController::class); // only => [] and except => [] can be use here e.g Route::resource('jobs', JobController::class, [ only => ['edit', 'update', 'etc'] ]); // same as except
+
+// Route::controller(JobController::class)->group(function () {
+//     Route::get('/jobs', 'index');
+//     Route::get('/jobs/create', 'create');
+//     Route::get('/jobs/{job}', 'show');
+//     Route::post('/jobs', 'store');
+//     Route::get('/jobs/{job}/edit', 'edit');
+//     Route::patch('/jobs/{job}', 'update');
+//     Route::delete('/jobs/{job}', 'destroy');
+// });
 
 
-// Index
-Route::get('/jobs', [JobController::class, 'index']);
-
-// Create
-Route::get('/jobs/create', [JobController::class, 'create']);
-
-// Show
-Route::get('/jobs/{job}', [JobController::class, 'show']);
+// Route::get('/contact', function () {
+//     return view('contact');
+// });
 
 
-// Store
-Route::post('/jobs', [JobController::class, 'store']);
+// Auth
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
-
-// edit
-Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
-
-// Update
-Route::patch('/jobs/{job}', [JobController::class, 'update']);
-
-// Destroy
-Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
-
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, 'store']);
