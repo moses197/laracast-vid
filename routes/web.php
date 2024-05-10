@@ -4,7 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Mail\JobPosted;
+use Illuminate\Support\Facades\Mail;
 
+// Route::get('test', function() {
+//     // return new \App\Mail\JobPosted();
+//     Mail::to('leomoszeko@gmail.com')->send(
+//         new JobPosted()
+//     );
+
+//     return 'Done';
+// });
 
 // Route::get('/', function () {
     
